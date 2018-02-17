@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe
 
 altbins: altbin/fq2fa_cpp altbin/par1line
 
@@ -44,3 +44,9 @@ bin/parstdin: parstdin.sh
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
+
+bin/describe: describe.R
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
