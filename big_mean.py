@@ -20,4 +20,4 @@ for l in fileinput.input():
     linecount = len(sl)
     bigsum += linesum
     bigcount += linecount
-    print str(linemean)
+    print str(float(bigsum) / float(bigcount))
