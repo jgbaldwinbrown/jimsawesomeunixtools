@@ -2,9 +2,6 @@
 
 import fileinput
 
-def sum(l):
-    return float(sum(l))
-
 def mean(l):
     return float(sum(l))/len(l) if len(l) > 0 else float('nan')
 
@@ -20,4 +17,4 @@ for l in fileinput.input():
     linecount = len(sl)
     bigsum += linesum
     bigcount += linecount
-    print str(float(bigsum) / float(bigcount))
+    print str(float(bigsum) / float(bigcount)) if bigcount > 0 else 'nan'
