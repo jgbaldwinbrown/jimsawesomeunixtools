@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean
 
 altbins: altbin/fq2fa_cpp altbin/par1line
 
@@ -50,3 +50,17 @@ bin/describe: describe.R
 	cp $< $@
 	chmod +x $@
 
+bin/qual2prob: qual2prob.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/mean_lines: mean_lines.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/cum_mean: cum_mean.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
