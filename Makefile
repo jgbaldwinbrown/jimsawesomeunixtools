@@ -13,54 +13,54 @@ clean:
 
 .DELETE_ON_ERROR:
 
-bin/transpose: transpose.awk
+bin/transpose: src/transpose.awk
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-bin/fq2fa: fq2fa.c
+bin/fq2fa: src/fq2fa.c
 	mkdir -p `dirname $@`
 	gcc -Wall -o3 -o $@ $<
 
-altbin/fq2fa_cpp: fq2fa.cpp
+altbin/fq2fa_cpp: src/fq2fa.cpp
 	mkdir -p `dirname $@`
 	g++ -Wall -o3 -o $@ $<
 
-bin/fq2qual: fq2qual.cpp
+bin/fq2qual: src/fq2qual.cpp
 	mkdir -p `dirname $@`
 	g++ -Wall -o3 -o $@ $<
 
-bin/fq2qualpar: fq2qualpar.sh
+bin/fq2qualpar: src/fq2qualpar.sh
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-altbin/par1line: par1line.sh
+altbin/par1line: src/par1line.sh
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-bin/parstdin: parstdin.sh
+bin/parstdin: src/parstdin.sh
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-bin/describe: describe.R
+bin/describe: src/describe.R
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-bin/qual2prob: qual2prob.py
+bin/qual2prob: src/qual2prob.py
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-bin/mean_lines: mean_lines.py
+bin/mean_lines: src/mean_lines.py
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
 
-bin/cum_mean: cum_mean.py
+bin/cum_mean: src/cum_mean.py
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
