@@ -1,3 +1,7 @@
 #!/usr/bin/Rscript
 
-summary (as.numeric (readLines ("stdin")))
+data=as.numeric(readLines("stdin"))
+cat("Number: ")
+cat(length(data))
+cat("\n")
+summary(data)
