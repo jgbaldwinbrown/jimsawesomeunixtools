@@ -9,7 +9,14 @@ altbins: altbin/fq2fa_cpp altbin/par1line
 clean:
 	-rm bin/*
 	-rm altbin/*
-.PHONY: all bins altbins clean
+
+install: all
+	cp bin/* ~/mybin
+
+uninstall:
+	ls bin/* | while read line ; do rm ~/mybin/`basename $${line}` ; done$
+
+.PHONY: all bins altbins clean install uninstall
 
 .DELETE_ON_ERROR:
 
