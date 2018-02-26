@@ -27,3 +27,39 @@ if args.separator_2:
     bs=args.separator_2
 if args.separator_o:
     os=args.separator_o
+
+conn1=open(args.file_a,"r")
+conn2=open(args.file_b,"r")
+acols=[0,1,2]
+bcols=[0,1,2]
+
+if args.file_a_cols:
+    acols=map(int,args.file_a_cols.split(","))
+if args.file_b_cols:
+    bcols=map(int,args.file_b_cols.split(","))
+
+bedcommand=args.bedcommand
+
+if args.for_bedtools:
+    bedtools_args=args.for_bedtools.split()
+
+atxt=""
+for l in conn1:
+    lr = l.rstrip('\n')
+    if not as = "no_separator":
+        sl=lr.split(as)
+    else:
+        sl=lr.split()
+    ccols = [sl[x] for x in acols]
+    atxt = atxt + ccols + as + l
+
+btxt=""
+for l in conn2:
+    lr = l.rstrip('\n')
+    if not bs = "no_separator":
+        sl=lr.split(bs)
+    else:
+        sl=lr.split()
+    ccols = [sl[x] for x in bcols]
+    btxt = btxt + ccols + bs + l
+
