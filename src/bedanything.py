@@ -63,3 +63,15 @@ for l in conn2:
     ccols = [sl[x] for x in bcols]
     btxt = btxt + ccols + bs + l
 
+#run the bedtools command:
+#...
+
+#if the user opted to remove the first 3 lines, do it:
+
+for line in bedout.split('\n'):
+    if not cutfirst3:
+        sl = line.split("\t")
+        print os.join(sl)
+    else:
+        sl=line.split("\t")
+        print os.join(sl[3:])
