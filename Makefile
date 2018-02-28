@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything
 
 altbins: altbin/fq2fa_cpp altbin/par1line
 
@@ -103,6 +103,11 @@ bin/fqstatsfull: src/fqstatsfull.sh
 	chmod +x $@
 
 bin/sf: src/sf.sh
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/bedanything: src/bedanything.py
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
