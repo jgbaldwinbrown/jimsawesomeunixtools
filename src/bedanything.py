@@ -119,9 +119,10 @@ finally:
 #if the user opted to remove the first 3 columns, do it:
 
 for line in bedout.split('\n'):
-    if not cutfirst3:
-        sl = line.split("\t")
-        print o_sep.join(sl)
-    else:
-        sl=line.split("\t")
-        print o_sep.join(sl[3:])
+    if not line == "":
+        if not cutfirst3:
+            sl = line.split("\t")
+            print o_sep.join(sl)
+        else:
+            sl=line.split("\t")
+            print o_sep.join(sl[3:])
