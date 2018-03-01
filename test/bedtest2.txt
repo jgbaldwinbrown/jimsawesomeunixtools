@@ -1,0 +1,2 @@
+c1	1	8	carrot1	carrot2
+c1	10	12	durian1	durian2

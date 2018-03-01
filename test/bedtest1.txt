@@ -1,0 +1,2 @@
+apple1	apple2	c1	1	15
+banana1	banana2	c1	5	22

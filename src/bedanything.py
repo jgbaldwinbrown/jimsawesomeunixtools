@@ -3,6 +3,8 @@
 import sys
 import argparse
 import subprocess
+import os
+import tempfile
 
 parser=argparse.ArgumentParser("Use bedtools to do range comparisons on any two tab-separated files.")
 parser.add_argument("bedcommand", help="The bedtools command to use.")
@@ -68,12 +70,30 @@ for l in conn2:
 
 #run the bedtools command:
 #...
-bedtools_command = ["bedtools",bedcommand,]
-if extra_args:
-    bedtools_command.append(extra_args)
-subprocess.Popen(bedtools_command)
+#bedtools_command = ["bedtools",bedcommand,]
+#if extra_args:
+#    bedtools_command.append(extra_args)
+#subprocess.Popen(bedtools_command)
 
-#if the user opted to remove the first 3 lines, do it:
+with tempfile.namedtemporaryfile() as file1:
+    file1.write(atxt)
+    file1.delete = false
+
+with tempfile.namedtemporaryfile() as file2:
+    file2.write(btxt)
+    file2.delete = false
+
+try:
+    p = subprocess.Popen(["bedtools",bedcommand,"-a",file1.name,"-b",file2.name,extra_args],
+              stdout=subprocess.PIPE)
+    bedout = p.communicate()[0]
+    print output
+finally:
+    os.remove(file1.name)
+    os.remove(file2.name)
+
+
+#if the user opted to remove the first 3 columns, do it:
 
 for line in bedout.split('\n'):
     if not cutfirst3:
@@ -82,3 +102,22 @@ for line in bedout.split('\n'):
     else:
         sl=line.split("\t")
         print os.join(sl[3:])
+
+#import os
+#import tempfile
+#import subprocess
+#from subprocess import check_output
+#
+#with tempfile.NamedTemporaryFile() as file:
+#    file.write("1\t2\n3\t4\n")
+#    file.delete = False
+#
+#try:
+#    p = subprocess.Popen(["awk", '{print $1 - 2}', file.name],
+#              stdout=subprocess.PIPE)
+#    output = p.communicate()[0]
+#    print output
+#    # or
+#    # output = check_output(["pram_axdnull", str(kmer), input_filename, file.name])
+#finally:
+#    os.remove(file.name)
