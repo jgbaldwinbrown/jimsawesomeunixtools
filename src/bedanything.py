@@ -2,6 +2,7 @@
 
 import sys
 import argparse
+import subprocess
 
 parser=argparse.ArgumentParser("Use bedtools to do range comparisons on any two tab-separated files.")
 parser.add_argument("bedcommand", help="The bedtools command to use.")
@@ -40,8 +41,10 @@ if args.file_b_cols:
 
 bedcommand=args.bedcommand
 
+extra_args = False
 if args.for_bedtools:
     bedtools_args=args.for_bedtools.split()
+    extra_args = True
 
 atxt=""
 for l in conn1:
@@ -65,6 +68,10 @@ for l in conn2:
 
 #run the bedtools command:
 #...
+bedtools_command = ["bedtools",bedcommand,]
+if extra_args:
+    bedtools_command.append(extra_args)
+subprocess.Popen(bedtools_command)
 
 #if the user opted to remove the first 3 lines, do it:
 
