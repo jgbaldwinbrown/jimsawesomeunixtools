@@ -97,11 +97,6 @@ for l in conn2:
 with tempfile.NamedTemporaryFile() as file1:
     file1.write(atxt)
     file1.delete = False
-    print file1.closed
-    print file1.closed
-
-print file1.closed
-
 with tempfile.NamedTemporaryFile() as file2:
     file2.write(btxt)
     file2.delete = False
@@ -110,18 +105,16 @@ try:
     commandlist = ["bedtools",bedcommand,"-a",file1.name,"-b",file2.name]
     if extra_args:
         commandlist.extend(bedtools_args)
-        print commandlist
-    p = subprocess.Popen(commandlist,
-              stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    #p=subprocess.Popen(["echo","hat"],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    bedout = p.communicate()[0].decode('utf-8').strip()
-    bederr = p.communicate()[1].decode('utf-8').strip()
+    #p = subprocess.Popen(" ".join(commandlist), shell=True, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    ##p=subprocess.Popen(["echo","hat"],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    #bedcomm = p.communicate(b'\n')
+    #print bedcomm
+    #bedout = bedcomm[0].decode()
+    #bederr = bedcomm[1].decode()
+    bedout = subprocess.check_output(" ".join(commandlist), shell=True)
 finally:
     os.remove(file1.name)
     os.remove(file2.name)
-
-print bedout
-print bederr
 
 #if the user opted to remove the first 3 columns, do it:
 
