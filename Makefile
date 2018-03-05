@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab
 
 altbins: altbin/fq2fa_cpp altbin/par1line
 
@@ -118,6 +118,26 @@ bin/grep_color: src/grep_color.sh
 	chmod +x $@
 
 bin/agrep_color: src/agrep_color.sh
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/fq2tab: src/fq2tab.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/fa2tab: src/fa2tab.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/tab2fq: src/tab2fq.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/tab2fa: src/tab2fa.py
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
