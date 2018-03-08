@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless bin/dusort bin/grep_cols
 
 altbins: altbin/fq2fa_cpp altbin/par1line
 
@@ -153,6 +153,16 @@ bin/faidxify: src/faidxify.sh
 	chmod +x $@
 
 bin/cless: src/cless
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/dusort: src/dusort.sh
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/grep_cols: src/grep_cols.py
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
