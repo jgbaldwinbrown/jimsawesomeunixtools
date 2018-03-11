@@ -90,7 +90,7 @@ elif gotd or gotb or gotp or gotq or gota:
             q = 1 - (a)**0.5
     if not gotp:
         if gotq:
-            p = gotq
+            p = q
         elif gotb:
             p = 1 - (b)**0.5
         elif gotd:
