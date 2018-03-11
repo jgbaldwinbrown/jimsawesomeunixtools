@@ -31,7 +31,7 @@ parser.add_argument("-r","--r", help="Recessive phenotype frequency.")
 
 args=parser.parse_args()
 
-if not (args.p or args.q or args.a or args.b or args.c):
+if not (args.p or args.q or args.a or args.b or args.c or args.d or args.r):
     exit("Need to specify at least one argument!")
 
 gota=False
@@ -83,20 +83,20 @@ elif gotd or gotb or gotp or gotq or gota:
         if gotp:
             q = 1 - p
         elif gotb:
-            q = sqrt(b)
+            q = b**0.5
         elif gotd:
-            q = sqrt(1 - d)
+            q = (1 - d)**0.5
         elif gota:
-            q = 1 - sqrt(a)
+            q = 1 - (a)**0.5
     if not gotp:
         if gotq:
             p = gotq
         elif gotb:
-            p = 1 - sqrt(b)
+            p = 1 - (b)**0.5
         elif gotd:
-            p = 1 - sqrt(1 - d)
+            p = 1 - (1 - d)**0.5
         elif gota:
-            p = sqrt(a)
+            p = (a)**0.5
     if not gotb:
         if gotd:
             b = 1 - d
@@ -105,7 +105,7 @@ elif gotd or gotb or gotp or gotq or gota:
         elif gotp:
             b = (1-p)**2
         elif gota:
-            b = (1 - sqrt(a))**2
+            b = (1 - (a)**0.5)**2
     if not gotd:
         if gotb:
             d = 1-b
@@ -114,7 +114,7 @@ elif gotd or gotb or gotp or gotq or gota:
         elif gotp:
             d = 1-((1-p)**2)
         elif gota:
-            d = 1-((1-sqrt(a))**2)
+            d = 1-((1-(a)**0.5)**2)
     if not gota:
         a = p**2
     if not gotb:
@@ -122,4 +122,15 @@ elif gotd or gotb or gotp or gotq or gota:
     if not gotc:
         c = 2 * p * q
     printem(p,q,a,b,c,d)
-        
+elif gotc:
+    #c = 2pq
+    #c = 2p(1-p)
+    #c = -2*p**2 + 2p
+    #0 = -2*p**2 + 2p - c
+    #p = (-2 +(2**2 - (4 * (-2) * (-c) )**0.5) / (2 * -2)
+    p = (-2 +(2**2 - (4 * (-2) * (-c) ))**0.5) / (2 * -2)
+    q = 1-p
+    a = p**2
+    b = q**2
+    d = 1 - b
+    printem(p,q,a,b,c,d)
