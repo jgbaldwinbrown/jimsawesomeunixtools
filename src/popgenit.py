@@ -8,13 +8,13 @@ import argparse
 #functions:
 
 def printem(p,q,a,b,c,d):
-    print "p = " + str(p)
-    print "q = " + str(q)
-    print "Homozygous dominant genotype frequency = " + str(a)
-    print "Homozygous recessive genotype frequency = " + str(b)
-    print "Heterozygote frequency = " + str(c)
-    print "Dominant phenotype frequency = " + str(d)
-    print "Recessive phenotype frequency = " + str(b)
+    print "Domiant allele frequency (P) = " + str(p)
+    print "Recessive allele frequency (Q) = " + str(q)
+    print "Homozygous dominant genotype frequency (A) = " + str(a)
+    print "Heterozygote frequency (C) = " + str(c)
+    print "Homozygous recessive genotype frequency (B) = " + str(b)
+    print "Dominant phenotype frequency (D) = " + str(d)
+    print "Recessive phenotype frequency (R) = " + str(b)
 
 ################################################################################
 ################################################################################
