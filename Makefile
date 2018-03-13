@@ -2,9 +2,9 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless bin/dusort bin/grep_cols bin/popgenit bin/stree bin/ds2tab
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless bin/dusort bin/grep_cols bin/popgenit bin/stree bin/ds2tab bin/revcompfa bin/revcompfq
 
-altbins: altbin/fq2fa_cpp altbin/par1line
+altbins: altbin/fq2fa_cpp altbin/par1line altbin/revcompfq altbin/revcompfa
 
 clean:
 	-rm bin/*
@@ -181,3 +181,21 @@ bin/stree: src/stree
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
+
+bin/revcompfa: src/revcompfa.sh
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/revcompfq: src/revcompfq
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+altbin/revcompfa: src/revcompfa.c
+	mkdir -p `dirname $@`
+	gcc -Wall -O3 -o $@ $<
+
+altbin/revcompfq: src/revcompfq.c
+	mkdir -p `dirname $@`
+	gcc -Wall -O3 -o $@ $<
