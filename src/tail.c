@@ -34,5 +34,9 @@ int main(int argc, char *argv[]){
         printf("%s",lines[queueindex]);
         queueindex = new_index(queueindex,tailnum);
     }
+    for (int i=0; i<tailnum; i++)
+    {
+        free(lines[i]);
+    }
     return 0;
 }
