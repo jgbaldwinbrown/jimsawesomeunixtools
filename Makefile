@@ -4,7 +4,7 @@ all: bins altbins
 
 bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless bin/dusort bin/grep_cols bin/popgenit bin/stree bin/ds2tab bin/revcompfa bin/revcompfq bin/subsetfa
 
-altbins: altbin/fq2fa_cpp altbin/par1line altbin/revcompfq altbin/revcompfa altbin/cat altbin/echo altbin/head altbin/tail
+altbins: altbin/fq2fa_cpp altbin/par1line altbin/revcompfq altbin/revcompfa altbin/cat altbin/echo altbin/head altbin/tail altbin/yes altbin/tr
 
 clean:
 	-rm bin/*
@@ -218,6 +218,14 @@ altbin/head: src/head.c
 	gcc -Wall -O3 -o $@ $<
 
 altbin/tail: src/tail.c
+	mkdir -p `dirname $@`
+	gcc -Wall -O3 -o $@ $<
+
+altbin/yes: src/yes.c
+	mkdir -p `dirname $@`
+	gcc -Wall -O3 -o $@ $<
+
+altbin/tr: src/tr.c
 	mkdir -p `dirname $@`
 	gcc -Wall -O3 -o $@ $<
 
