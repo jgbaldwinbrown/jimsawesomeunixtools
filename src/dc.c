@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 int sindex = 0;
-double stack[256];
+long double stack[256];
 
-void push(double value){
+void push(long double value){
     if (sindex >= 255)
     {
         puts("Stack overflow!");
@@ -15,13 +15,13 @@ void push(double value){
     stack[sindex] = value;
 }
 
-double pop(){
+long double pop(){
     if (sindex <= 0)
     {
         puts("Stack underflow!");
         exit(2);
     }
-    double temp;
+    long double temp;
     temp = stack[sindex];
     sindex--;
     return temp;
@@ -29,9 +29,9 @@ double pop(){
 
 int main(int argc, char *argv[]){
     char i1;
-    double id;
-    double op1;
-    double op2;
+    long double id;
+    long double op1;
+    long double op2;
     for (int i=0; i<256; i++){
         stack[i] = 0;
     }
@@ -64,10 +64,10 @@ int main(int argc, char *argv[]){
                 push(pow(op1,op2));
                 break;
             case 'p' :
-                printf("%e\n",pop());
+                printf("%.10Le\n",pop());
                 break;
             default :
-                sscanf(argv[i], "%lf", &id);
+                sscanf(argv[i], "%Lf", &id);
                 push(id);
         }
     }
