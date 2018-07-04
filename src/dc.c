@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 int sindex = 0;
 long double stack[256];
@@ -28,47 +29,61 @@ long double pop(){
 }
 
 int main(int argc, char *argv[]){
+
+    char *line;
+    size_t bufsize = 32;
+    ssize_t nread = 0;
+    char *pch;
+
     char i1;
     long double id;
     long double op1;
     long double op2;
+
+
     for (int i=0; i<256; i++){
         stack[i] = 0;
     }
-    for (int i=1; i<argc; i++){
-        i1 = argv[i][0];
-        switch(i1){
-            case '+' :
-                op2 = pop();
-                op1 = pop();
-                push(op1 + op2);
-                break;
-            case '-' :
-                op2 = pop();
-                op1 = pop();
-                push(op1 - op2);
-                break;
-            case '*' :
-                op2 = pop();
-                op1 = pop();
-                push(op1 * op2);
-                break;
-            case '/' :
-                op2 = pop();
-                op1 = pop();
-                push(op1 / op2);
-                break;
-            case '^' :
-                op2 = pop();
-                op1 = pop();
-                push(pow(op1,op2));
-                break;
-            case 'p' :
-                printf("%.10Le\n",pop());
-                break;
-            default :
-                sscanf(argv[i], "%Lf", &id);
-                push(id);
+    while((nread = getline(&line, &bufsize, stdin) != EOF))
+    {
+        pch = strtok(line," 	");
+        while (pch != NULL)
+        {
+            i1 = pch[0];
+            switch(i1){
+                case '+' :
+                    op2 = pop();
+                    op1 = pop();
+                    push(op1 + op2);
+                    break;
+                case '-' :
+                    op2 = pop();
+                    op1 = pop();
+                    push(op1 - op2);
+                    break;
+                case '*' :
+                    op2 = pop();
+                    op1 = pop();
+                    push(op1 * op2);
+                    break;
+                case '/' :
+                    op2 = pop();
+                    op1 = pop();
+                    push(op1 / op2);
+                    break;
+                case '^' :
+                    op2 = pop();
+                    op1 = pop();
+                    push(pow(op1,op2));
+                    break;
+                case 'p' :
+                    printf("%.10Le\n",pop());
+                    break;
+                default :
+                    sscanf(pch, "%Lf", &id);
+                    push(id);
+            }
+                pch = strtok(NULL," 	");
         }
     }
 }
