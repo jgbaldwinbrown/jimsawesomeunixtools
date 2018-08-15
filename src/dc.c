@@ -79,6 +79,8 @@ int main(int argc, char *argv[]){
                 case 'p' :
                     printf("%.10Le\n",pop());
                     break;
+                case 'q' :
+                    exit(0);
                 default :
                     sscanf(pch, "%Lf", &id);
                     push(id);
