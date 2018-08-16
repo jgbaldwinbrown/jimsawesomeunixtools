@@ -4,16 +4,22 @@
 #include <string.h>
 
 int sindex = 0;
-long double stack[256];
+long double *stack;
+int stacksize = 8;
 
 void push(long double value){
-    if (sindex >= 255)
+    if (sindex >= stacksize)
     {
         puts("Stack overflow!");
         exit(1);
     }
+    if (sindex >= (stacksize - 1))
+    {
+        stacksize = stacksize * 2;
+        stack = (long double *)realloc(stack,sizeof(long double) * stacksize);
+    }
     sindex++;
-    stack[sindex] = value;
+    *(stack + sindex) = value;
 }
 
 long double pop(){
@@ -23,12 +29,14 @@ long double pop(){
         exit(2);
     }
     long double temp;
-    temp = stack[sindex];
+    temp = *(stack + sindex);
     sindex--;
     return temp;
 }
 
 int main(int argc, char *argv[]){
+
+    stack = (long double *)malloc(sizeof(long double) * stacksize);
 
     char *line;
     size_t bufsize = 32;
@@ -40,9 +48,8 @@ int main(int argc, char *argv[]){
     long double op1;
     long double op2;
 
-
-    for (int i=0; i<256; i++){
-        stack[i] = 0;
+    for (int i=0; i<stacksize; i++){
+        *(stack + i) = 0;
     }
     while((nread = getline(&line, &bufsize, stdin) != EOF))
     {
@@ -88,4 +95,5 @@ int main(int argc, char *argv[]){
                 pch = strtok(NULL," 	");
         }
     }
+    free(stack);
 }
