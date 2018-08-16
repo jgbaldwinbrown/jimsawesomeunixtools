@@ -3,11 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int sindex = 0;
-long double *stack;
-int stacksize = 8;
-
-void push(long double value){
+void push(long double *stack, int sindex, int stacksize, long double value){
     if (sindex >= stacksize)
     {
         puts("Stack overflow!");
@@ -22,7 +18,7 @@ void push(long double value){
     *(stack + sindex) = value;
 }
 
-long double pop(){
+long double pop(long double *stack, int sindex, int stacksize){
     if (sindex <= 0)
     {
         puts("Stack underflow!");
@@ -35,7 +31,10 @@ long double pop(){
 }
 
 int main(int argc, char *argv[]){
-
+    
+    int sindex = 0;
+    long double *stack;
+    int stacksize = 8;
     stack = (long double *)malloc(sizeof(long double) * stacksize);
 
     char *line;
@@ -59,41 +58,42 @@ int main(int argc, char *argv[]){
             i1 = pch[0];
             switch(i1){
                 case '+' :
-                    op2 = pop();
-                    op1 = pop();
-                    push(op1 + op2);
+                    op2 = pop(stack, &sindex, &stacksize);
+                    op1 = pop(stack, &sindex, &stacksize);
+                    push(stack, &sindex, &stacksize, op1 + op2);
                     break;
                 case '-' :
-                    op2 = pop();
-                    op1 = pop();
-                    push(op1 - op2);
+                    op2 = pop(stack, &sindex, &stacksize);
+                    op1 = pop(stack, &sindex, &stacksize);
+                    push(stack, &sindex, &stacksize, op1 - op2);
                     break;
                 case '*' :
-                    op2 = pop();
-                    op1 = pop();
-                    push(op1 * op2);
+                    op2 = pop(stack, &sindex, &stacksize);
+                    op1 = pop(stack, &sindex, &stacksize);
+                    push(stack, &sindex, &stacksize, op1 * op2);
                     break;
                 case '/' :
-                    op2 = pop();
-                    op1 = pop();
-                    push(op1 / op2);
+                    op2 = pop(stack, &sindex, &stacksize);
+                    op1 = pop(stack, &sindex, &stacksize);
+                    push(stack, &sindex, &stacksize, op1 / op2);
                     break;
                 case '^' :
-                    op2 = pop();
-                    op1 = pop();
-                    push(pow(op1,op2));
+                    op2 = pop(stack, &sindex, &stacksize);
+                    op1 = pop(stack, &sindex, &stacksize);
+                    push(stack, &sindex, &stacksize, pow(op1,op2));
                     break;
                 case 'p' :
-                    printf("%.10Le\n",pop());
+                    printf("%.10Le\n",pop(stack, &sindex, &stacksize));
                     break;
                 case 'q' :
                     exit(0);
                 default :
                     sscanf(pch, "%Lf", &id);
-                    push(id);
+                    push(stack, &sindex, &stacksize, id);
             }
                 pch = strtok(NULL," 	");
         }
     }
     free(stack);
+    return(0);
 }
