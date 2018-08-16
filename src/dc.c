@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
     long double *stack;
     stack = (long double *)malloc((sizeof(long double) * stacksize));
 
-    char *line;
+    char *line = NULL;
     size_t bufsize = 32;
     ssize_t nread = 0;
     char *pch;
@@ -52,22 +52,15 @@ int main(int argc, char *argv[]){
     for (unsigned long i=0; i<stacksize; i++){
         stack[i] = 0;
     }
-
-    push(stack, sindex_p, stacksize_p, 3.0);
-    push(stack, sindex_p, stacksize_p, 4.0);
-    op2 = pop(stack, sindex_p, stacksize_p);
-    op1 = pop(stack, sindex_p, stacksize_p);
-    push(stack, sindex_p, stacksize_p, pow(op1,op2));
-    printf("%.10Le\n",pop(stack, sindex_p, stacksize_p));
     
-
-    while((nread = getline(&line, &bufsize, stdin)) != -1)
+    while((nread = getline(&line, &bufsize, stdin) != EOF))
     {
         pch = strtok(line," 	");
         while (pch != NULL)
         {
             i1 = pch[0];
-            switch(i1){
+            switch(i1)
+            {
                 case '+' :
                     op2 = pop(stack, sindex_p, stacksize_p);
                     op1 = pop(stack, sindex_p, stacksize_p);
