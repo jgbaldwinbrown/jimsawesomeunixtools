@@ -99,5 +99,6 @@ int main(int argc, char *argv[]){
         }
     }
     free(stack);
+    free(line);
     return(0);
 }
