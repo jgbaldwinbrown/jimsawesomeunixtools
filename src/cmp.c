@@ -20,7 +20,13 @@ int main(int argc, char *argv[]){
             }
         } else {
             puts("File 2 is shorter than file 1!");
+            return(1);
         }
+    }
+    if ((c2=fgetc(f2)) != EOF)
+    {
+        puts("File 1 is shorter than file 2!");
+        return(1);
     }
     puts("File 1 and file 2 match!");
     return(0);
