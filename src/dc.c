@@ -95,7 +95,7 @@ int main(int argc, char *argv[]){
                     sscanf(pch, "%Lf", &id);
                     push(stack, sindex_p, stacksize_p, id);
             }
-                pch = strtok(NULL," 	");
+            pch = strtok(NULL," 	");
         }
     }
     free(stack);
