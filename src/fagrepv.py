@@ -5,11 +5,27 @@ import sys
 
 def regexit(regex, header, seq):
     matches = regex.finditer(seq)
+    starts = []
+    ends = []
     if matches:
         for i in matches:
-            outlist = [header, i.start(), i.end(), i.group()]
-            [outlist.append(x) for x in i.groups()]
-            print("\t".join(map(str,outlist)))
+            starts.append(i.start())
+            ends.append(i.end())
+    print(header)
+    print(seq)
+    outline=list(" "*len(seq))
+    for i in ends:
+        try:
+            outline[i-1] = "]"
+        except IndexError:
+            pass
+    for i in starts:
+        try:
+            outline[i] = "["
+        except IndexError:
+            pass
+    outline = "".join(outline)
+    print(outline)
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
