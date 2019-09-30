@@ -7,8 +7,16 @@ def regexit(regex, header, seq):
     matches = regex.finditer(seq)
     if matches:
         for i in matches:
-            outlist = [header, i.start(), i.end(), i.group()]
-            [outlist.append(x) for x in i.groups()]
+            outlist = [header]
+            if i.lastindex:
+                for j in range(i.lastindex + 1):
+                    outlist.append(i.start(j))
+                    outlist.append(i.end(j))
+                    outlist.append(i.group(j))
+            else:
+                outlist.append(i.start())
+                outlist.append(i.end())
+                outlist.append(i.group())
             print("\t".join(map(str,outlist)))
 
 if __name__ == "__main__":
