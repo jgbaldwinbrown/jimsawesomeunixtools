@@ -2,9 +2,9 @@ SHELL := /bin/bash
 
 all: bins altbins
 
-bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless bin/dusort bin/grep_cols bin/popgenit bin/stree bin/ds2tab bin/revcompfa bin/revcompfq bin/subsetfa bin/fagrep
+bins: bin/transpose bin/fq2fa bin/fq2qual bin/fq2qualpar bin/parstdin bin/describe bin/qual2prob bin/mean_lines bin/cum_mean bin/full_blast_recips bin/full_best_blast_hit bin/get_best_blast_hit bin/get_blast_recips bin/qualstats bin/fqstatsfull bin/sf bin/bedanything bin/grep_color bin/agrep_color bin/tab2fa bin/tab2fq bin/fa2tab bin/fq2tab bin/alphacolsort bin/faidxify bin/cless bin/dusort bin/grep_cols bin/popgenit bin/stree bin/ds2tab bin/revcompfa bin/revcompfq bin/subsetfa bin/fagrep bin/fqgrep
 
-altbins: altbin/fq2fa_cpp altbin/par1line altbin/revcompfq altbin/revcompfa altbin/cat altbin/echo altbin/head altbin/tail altbin/yes altbin/tr altbin/true altbin/false altbin/wc altbin/touch altbin/dc altbin/dca altbin/cmp altbin/xxd
+altbins: altbin/fq2fa_cpp altbin/par1line altbin/revcompfq altbin/revcompfa altbin/cat altbin/echo altbin/head altbin/tail altbin/yes altbin/tr altbin/true altbin/false altbin/wc altbin/touch altbin/dc altbin/dca altbin/cmp altbin/xxd altbin/column
 
 clean:
 	-rm bin/*
@@ -266,11 +266,16 @@ altbin/xxd: src/xxd.c
 	mkdir -p `dirname $@`
 	gcc -Wall -O3 -o $@ $<
 
-#altbin/column: src/column.c
-#	mkdir -p `dirname $@`
-#	gcc -Wall -O3 -o $@ $<
+altbin/column: src/column.c
+	mkdir -p `dirname $@`
+	gcc -Wall -O3 -o $@ $<
 
 bin/fagrep: src/fagrep.py
+	mkdir -p `dirname $@`
+	cp $< $@
+	chmod +x $@
+
+bin/fqgrep: src/fqgrep.sh
 	mkdir -p `dirname $@`
 	cp $< $@
 	chmod +x $@
