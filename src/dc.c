@@ -87,7 +87,7 @@ int main(int argc, char *argv[]){
                     push(stack, sindex_p, stacksize_p, pow(op1,op2));
                     break;
                 case 'p' :
-                    printf("%.10Le\n",pop(stack, sindex_p, stacksize_p));
+                    printf("%.10Lg\n",pop(stack, sindex_p, stacksize_p));
                     break;
                 case 'q' :
                     exit(0);
